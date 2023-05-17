@@ -20,14 +20,33 @@ spec:
     spec:
       containers:
         - name: ssamd
-          image: >-
-            kube-manifest.kr.ncr.ntruss.com/ssamd:bdf1e66c
-          # env:
-          #   - name: GOOGLE_CLIENT_ID
-          #     valueFrom:
-          #       configMapKeyRef:
-          #         name: ssamd
-          #         key: GOOGLE_CLIENT_ID
+          image: kube-manifest.kr.ncr.ntruss.com/ssamd:a7016a2
+          imagePullPolicy: Always
+          # TODO : health check 추가 예정
+          # livenessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: 3200
+          #   initialDelaySeconds: 5
+          #   periodSeconds: 10
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 3200
+          #   initialDelaySeconds: 10
+          #   timeoutSeconds: 5
+          # startupProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: 3200
+          #   failureThreshold: 5
+          #   periodSeconds: 10
+          # resources:
+          #   limits:
+          #     cpu: 500m
+          #     memory: 2Gi
+          #   requests:
+          #     cpu: 200m
+          #     memory: 1Gi
           command:
             - /bin/sh
           args:
@@ -35,6 +54,9 @@ spec:
             - yarn start
           ports:
             - containerPort: 3000
+          # envFrom:
+          #   - secretRef:
+          #       name: api-server-dev
 ---
 apiVersion: v1
 kind: Service

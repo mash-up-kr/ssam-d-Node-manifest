@@ -22,27 +22,12 @@ spec:
         - name: ssamd
           image: >-
             kube-manifest.kr.ncr.ntruss.com/ssamd:043d3fa8
-          env:
-            - name: GOOGLE_CLIENT_ID
-              valueFrom:
-                configMapKeyRef:
-                  name: ssamd
-                  key: GOOGLE_CLIENT_ID
-            - name: GOOGLE_SECRET
-              valueFrom:
-                configMapKeyRef:
-                  name: ssamd
-                  key: GOOGLE_SECRET
-            - name: CALLBACK_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: ssamd
-                  key: CALLBACK_URL
-            - name: DB_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: ssamd
-                  key: DB_URL
+          # env:
+          #   - name: GOOGLE_CLIENT_ID
+          #     valueFrom:
+          #       configMapKeyRef:
+          #         name: ssamd
+          #         key: GOOGLE_CLIENT_ID
           command:
             - /bin/sh
           args:

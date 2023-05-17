@@ -21,7 +21,7 @@ spec:
       containers:
         - name: ssamd
           image: >-
-            kube-manifest.kr.ncr.ntruss.com/ssamd:043d3fa8
+            kube-manifest.kr.ncr.ntruss.com/ssamd:bdf1e66c
           # env:
           #   - name: GOOGLE_CLIENT_ID
           #     valueFrom:

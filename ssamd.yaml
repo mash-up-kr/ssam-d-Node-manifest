@@ -22,6 +22,8 @@ spec:
         - name: ssamd
           image: kube-manifest.kr.ncr.ntruss.com/ssamd:a7016a2
           imagePullPolicy: Always
+        imagePullSecrets:
+        - name: docker-registry-login
           # TODO : health check 추가 예정
           # livenessProbe:
           #   httpGet:

@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: ssamd
-          image: kube-manifest.kr.ncr.ntruss.com/ssamd:a7016a2
+          image: kube-manifest.kr.ncr.ntruss.com/ssamd:3d304581
           imagePullPolicy: Always
           # TODO : health check 추가 예정
           # livenessProbe:
@@ -54,9 +54,9 @@ spec:
             - yarn start
           ports:
             - containerPort: 3000
-          # envFrom:
-          #   - secretRef:
-          #       name: api-server-dev
+              # envFrom:
+              #   - secretRef:
+              #       name: api-server-dev
       imagePullSecrets:
         - name: docker-registry-login
 ---

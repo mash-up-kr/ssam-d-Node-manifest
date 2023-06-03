@@ -54,9 +54,9 @@ spec:
             - yarn start
           ports:
             - containerPort: 3000
-              # envFrom:
-              #   - secretRef:
-              #       name: api-server-dev
+          envFrom:
+            - secretRef:
+                name: ssamd-server-env
       imagePullSecrets:
         - name: docker-registry-login
 ---

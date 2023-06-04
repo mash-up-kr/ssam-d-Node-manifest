@@ -38,7 +38,6 @@ spec:
               pnpm start
           ports:
             - containerPort: 3000
-      restartPolicy: Never
       imagePullSecrets:
         - name: docker-registry-login
 ---

@@ -29,11 +29,12 @@ spec:
                   key: DATABASE_URL
           command:
             - /bin/sh
+            - -ec
           args:
-            - "-ec"
-            - pnpm -- npx prisma db push
-            - pnpm prisma generate
-            - pnpm start
+            - |
+              pnpm -- npx prisma db push
+              pnpm prisma generate
+              pnpm start
           ports:
             - containerPort: 3000
       imagePullSecrets:

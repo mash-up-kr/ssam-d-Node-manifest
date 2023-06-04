@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: ssamd
-          image: kube-manifest.kr.ncr.ntruss.com/ssamd:9982535b
+          image: kube-manifest.kr.ncr.ntruss.com/ssamd:0894f6a1
           imagePullPolicy: Always
           # TODO : health check 추가 예정
           # livenessProbe:

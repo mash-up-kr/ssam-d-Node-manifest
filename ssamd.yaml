@@ -27,7 +27,6 @@ spec:
                 configMapKeyRef:
                   name: ssamd-server-env
                   key: DATABASE_URL
-          imagePullPolicy: Always
           command:
             - /bin/sh
             - -ec

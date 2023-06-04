@@ -27,6 +27,7 @@ spec:
                 configMapKeyRef:
                   name: ssamd-server-env
                   key: DATABASE_URL
+          imagePullPolicy: Always
           command:
             - /bin/sh
             - -ec
@@ -37,6 +38,7 @@ spec:
               pnpm start
           ports:
             - containerPort: 3000
+      restartPolicy: Never
       imagePullSecrets:
         - name: docker-registry-login
 ---

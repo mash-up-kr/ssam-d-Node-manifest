@@ -21,42 +21,20 @@ spec:
       containers:
         - name: ssamd
           image: kube-manifest.kr.ncr.ntruss.com/ssamd:0894f6a1
-          imagePullPolicy: Always
-          # TODO : health check 추가 예정
-          # livenessProbe:
-          #   httpGet:
-          #     path: /health
-          #     port: 3200
-          #   initialDelaySeconds: 5
-          #   periodSeconds: 10
-          # readinessProbe:
-          #   tcpSocket:
-          #     port: 3200
-          #   initialDelaySeconds: 10
-          #   timeoutSeconds: 5
-          # startupProbe:
-          #   httpGet:
-          #     path: /health
-          #     port: 3200
-          #   failureThreshold: 5
-          #   periodSeconds: 10
-          # resources:
-          #   limits:
-          #     cpu: 500m
-          #     memory: 2Gi
-          #   requests:
-          #     cpu: 200m
-          #     memory: 1Gi
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: ssamd-server-env
+                  key: DATABASE_URL
           command:
             - /bin/sh
           args:
             - "-ec"
-            - yarn start
+            - pnpm -- npx prisma db push
+            - pnpm start
           ports:
             - containerPort: 3000
-          envFrom:
-            - configMapRef:
-                name: ssamd-server-env
       imagePullSecrets:
         - name: docker-registry-login
 ---

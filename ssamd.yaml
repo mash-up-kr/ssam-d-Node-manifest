@@ -32,7 +32,7 @@ spec:
             - -ec
           args:
             - |
-              pnpm -- npx prisma db push
+              pnpm prisma migrate deploy
               pnpm start
           ports:
             - containerPort: 3000

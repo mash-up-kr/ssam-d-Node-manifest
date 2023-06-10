@@ -67,7 +67,7 @@ spec:
     - host: "keylink.kr"
       http:
         paths:
-          - path: "/"
+          - path: "/api"
             pathType: Prefix
             backend:
               service:

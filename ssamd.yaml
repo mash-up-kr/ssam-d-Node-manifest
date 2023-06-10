@@ -33,7 +33,6 @@ spec:
           args:
             - |
               pnpm -- npx prisma db push
-              pnpm prisma generate
               pnpm start
           ports:
             - containerPort: 3000

@@ -21,12 +21,6 @@ spec:
       containers:
         - name: ssamd
           image: kube-manifest.kr.ncr.ntruss.com/ssamd:3c13cb00
-          env:
-            - name: DATABASE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: ssamd-server-env
-                  key: DATABASE_URL
           command:
             - /bin/sh
             - -ec
@@ -34,6 +28,9 @@ spec:
             - |
               pnpm prisma migrate deploy
               pnpm start
+          envFrom:
+            - configMapRef:
+                name: ssamd-server-env
           ports:
             - containerPort: 3000
       imagePullSecrets:

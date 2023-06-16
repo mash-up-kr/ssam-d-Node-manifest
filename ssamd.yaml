@@ -1,36 +1,40 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: ssamd
+  name: ssamd-dev
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ssamd
-  namespace: ssamd
+  name: ssamd-dev
+  namespace: ssamd-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ssamd
+      app: ssamd-dev
   template:
     metadata:
       labels:
-        app: ssamd
+        app: ssamd-dev
     spec:
       containers:
-        - name: ssamd
-          image: kube-manifest.kr.ncr.ntruss.com/ssamd:90c18cb2
+        - name: ssamd-dev
+          image: kube-manifest.kr.ncr.ntruss.com/ssamd-dev:90c18cb2
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: ssamd-dev-server-env
+                  key: DATABASE_URL
           command:
             - /bin/sh
             - -ec
           args:
             - |
-              pnpm prisma migrate deploy
+              pnpm -- npx prisma db push
+              pnpm prisma generate
               pnpm start
-          envFrom:
-            - configMapRef:
-                name: ssamd-server-env
           ports:
             - containerPort: 3000
       imagePullSecrets:
@@ -39,39 +43,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: ssamd
-  name: ssamd
-  labels:
-    app: ssamd
+  name: ssamd-dev
+  namespace: ssamd-dev
 spec:
+  type: NodePort
   ports:
-    - protocol: TCP
-      port: 3000
+    - port: 3000
       targetPort: 3000
+      nodePort: 30000
   selector:
-    app: ssamd
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  namespace: ssamd
-  name: ssamd-ingress
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    cert-manager.io/issuer: tls-issuer
-spec:
-  rules:
-    - host: "keylink.kr"
-      http:
-        paths:
-          - path: "/api"
-            pathType: Prefix
-            backend:
-              service:
-                name: ssamd
-                port:
-                  number: 3000
-  tls:
-    - hosts:
-        - "keylink.kr"
-      secretName: tls-secret-ingress
+    app: ssamd-dev

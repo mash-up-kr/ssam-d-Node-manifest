@@ -34,7 +34,7 @@ spec:
             - |
               pnpm -- npx prisma db push
               pnpm prisma generate
-              pnpm start
+              pnpm start:dev
           ports:
             - containerPort: 3000
       imagePullSecrets:

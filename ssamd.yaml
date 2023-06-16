@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: ssamd
-          image: kube-manifest.kr.ncr.ntruss.com/ssamd:90c18cb2
+          image: kube-manifest.kr.ncr.ntruss.com/:a186be46
           command:
             - /bin/sh
             - -ec

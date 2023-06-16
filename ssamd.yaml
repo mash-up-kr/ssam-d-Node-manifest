@@ -32,9 +32,11 @@ spec:
             - -ec
           args:
             - |
-              pnpm -- npx prisma db push
-              pnpm prisma generate
-              pnpm start:dev
+              pnpm prisma migrate deploy
+              pnpm start
+          envFrom:
+            - configMapRef:
+                name: ssamd-dev-server-env
           ports:
             - containerPort: 3000
       imagePullSecrets:

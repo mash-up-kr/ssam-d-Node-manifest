@@ -33,7 +33,7 @@ spec:
           args:
             - |
               pnpm prisma migrate deploy
-              pnpm start
+              pnpm start:dev
           envFrom:
             - configMapRef:
                 name: ssamd-dev-server-env

@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: ssamd-dev
-          image: kube-manifest.kr.ncr.ntruss.com/ssamd-dev:92c151a2
+          image: kube-manifest.kr.ncr.ntruss.com/ssamd-dev:c05a291e
           env:
             - name: DATABASE_URL
               valueFrom:
